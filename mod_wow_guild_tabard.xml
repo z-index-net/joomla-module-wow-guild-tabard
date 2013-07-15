@@ -32,16 +32,6 @@
                     <option value="tw">Taiwan</option>
                     <option value="sea">Southeast Asia</option>
                 </field>
-                <field name="lang" type="list" default="" required="true" label="MOD_WOW_GUILD_TABARD_LANG_LABEL">
-                    <option value="">-- select --</option>
-                    <option value="en">English</option>
-                    <option value="de">German</option>
-                    <option value="fr">Français</option>
-                    <option value="es">Español</option>
-                    <option value="it">Italiano</option>
-                    <option value="pt">Português</option>
-                    <option value="ru">Русский</option>
-                </field>
             </fieldset>
             <fieldset name="advanced">
                 <field name="layout" type="modulelayout" label="JFIELD_ALT_LAYOUT_LABEL" description="JFIELD_ALT_MODULE_LAYOUT_DESC"/>

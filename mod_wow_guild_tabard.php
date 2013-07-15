@@ -14,7 +14,6 @@ require_once dirname(__FILE__) . '/helper.php';
 $params->set('guild', rawurlencode(strtolower($params->get('guild'))));
 $params->set('realm', rawurlencode(strtolower($params->get('realm'))));
 $params->set('region', strtolower($params->get('region')));
-$params->set('lang', strtolower($params->get('lang', 'en')));
 
 $tabard = mod_wow_guild_tabard::_($params);
 

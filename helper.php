@@ -38,37 +38,19 @@ abstract class mod_wow_guild_tabard {
     	}
         
         $result->body = json_decode($result->body);
-        // https://github.com/ArmorySuite/AS-WoW-Core/blob/master/-main.php
-        /*
-         * 
-         * var tabard = new GuildTabard('canvas-element', {
-		 *	 		'ring': 'alliance',
-		 *			'bg': [ 0, 2, 2, 2 ],
-		 *			'border': [ 0, 4, 4, 4 ],
-		 *			'emblem': [ 65, 5, 5, 5 ]
-		 *		});
-         * 
-         [emblem] => stdClass Object
-                (
-                    [icon] => 151
-                    [iconColor] => ff101517
-                    [border] => 0
-                    [borderColor] => ff0f1415
-                    [backgroundColor] => ff232323
-                )
-         */
-        
+
         $tabard = new stdClass;
-        $tabard->staticUrl = 'http://' . $params->get('region') . '.battle.net'; 
         $tabard->ring = ($result->body->side == 1) ? 'horde' : 'alliance';
-        $tabard->bg = array();
-        $tabard->border = array();
-        $tabard->emblem = array($result->body->icon);
-       
+        $tabard->staticUrl = JUri::base(true) . '/modules/mod_wow_guild_tabard/tmpl/images/';
+        $tabard->emblem = self::AlphaHexToRGB($result->body->emblem->iconColor, $result->body->emblem->icon);
+        $tabard->border = self::AlphaHexToRGB($result->body->emblem->borderColor, $result->body->emblem->border);
+        $tabard->bg = self::AlphaHexToRGB($result->body->emblem->backgroundColor, 0);
 		return $tabard;
     }
     
-    private static function AlphaHexToAlphaRGB($str) {
-    	return array_map('hexdec', str_split($str, 2));
+    private static function AlphaHexToRGB($color, $first) {
+    	$array = array_map('hexdec', str_split($color, 2));
+    	$array[0] = $first; // override alpha value
+    	return $array;
     }
 }
