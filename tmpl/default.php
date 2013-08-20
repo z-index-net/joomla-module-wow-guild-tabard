@@ -15,7 +15,7 @@ JFactory::getDocument()->addScript($base . '/modules/' . $module->module . '/tmp
 JFactory::getDocument()->addStyleSheet($base . '/modules/' . $module->module . '/tmpl/stylesheet.css');
 ?>
 <div class="mod_wow_guild_tabard">
-<canvas id="wow_guild_tabard" width="240" height="240"></canvas>
+<canvas id="wow_guild_tabard" width="<?php echo (int) $params->get('size', 240); ?>" height="<?php echo (int) $params->get('size', 240); ?>"></canvas>
 <script type="text/javascript">
 new GuildTabard('wow_guild_tabard',<?php echo json_encode($tabard)?>);
 </script>

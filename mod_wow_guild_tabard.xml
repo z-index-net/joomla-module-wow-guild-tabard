@@ -32,6 +32,7 @@
                     <option value="tw">Taiwan</option>
                     <option value="sea">Southeast Asia</option>
                 </field>
+                <field name="size" type="text" filter="integer" default="240" required="true" label="MOD_WOW_GUILD_TABARD_SIZE_LABEL" description="MOD_WOW_GUILD_TABARD_SIZE_DESC" />
             </fieldset>
             <fieldset name="advanced">
                 <field name="layout" type="modulelayout" label="JFIELD_ALT_LAYOUT_LABEL" description="JFIELD_ALT_MODULE_LAYOUT_DESC"/>
