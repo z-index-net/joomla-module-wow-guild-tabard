@@ -9,10 +9,8 @@
  
 defined('_JEXEC') or die;
 
-$base = JUri::base(true);
-
-JFactory::getDocument()->addScript($base . '/modules/' . $module->module . '/tmpl/guildtabard.js');
-JFactory::getDocument()->addStyleSheet($base . '/modules/' . $module->module . '/tmpl/stylesheet.css');
+JFactory::getDocument()->addScript(JUri::base(true) . '/modules/' . $module->module . '/tmpl/guildtabard.js');
+JFactory::getDocument()->addStyleSheet(JUri::base(true) . '/modules/' . $module->module . '/tmpl/stylesheet.css');
 ?>
 <div class="mod_wow_guild_tabard">
 <canvas id="wow_guild_tabard" width="<?php echo (int) $params->get('size', 240); ?>" height="<?php echo (int) $params->get('size', 240); ?>"></canvas>

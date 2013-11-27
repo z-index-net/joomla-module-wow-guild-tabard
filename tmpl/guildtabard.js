@@ -3,7 +3,6 @@
  *
  * @copyright   2010, Blizzard Entertainment, Inc
  * @class       GuildTabard
- * @requires    
  * @example
  *
  *      var tabard = new GuildTabard('canvas-element', {
