@@ -9,11 +9,38 @@
 
 defined('_JEXEC') or die;
 
-abstract class mod_wow_guild_tabard
+abstract class ModWowGuildTabardHelper
 {
-
-    public static function _(JRegistry &$params)
+    public static function getAjax()
     {
+        $module = JModuleHelper::getModule('mod_' . JFactory::getApplication()->input->get('module'));
+
+        if (empty($module)) {
+            return false;
+        }
+
+        JFactory::getLanguage()->load($module->module);
+
+        $params = new JRegistry($module->params);
+        $params->set('ajax', 0);
+
+        ob_start();
+
+        require(dirname(__FILE__) . '/' . $module->module . '.php');
+
+        return ob_get_clean();
+    }
+
+    public static function getData(JRegistry &$params)
+    {
+        if ($params->get('ajax')) {
+            return;
+        }
+
+        $params->set('guild', rawurlencode(JString::strtolower($params->get('guild'))));
+        $params->set('realm', rawurlencode(JString::strtolower($params->get('realm'))));
+        $params->set('region', strtolower($params->get('region')));
+
         $url = 'http://' . $params->get('region') . '.battle.net/api/wow/guild/' . $params->get('realm') . '/' . $params->get('guild');
 
         $cache = JFactory::getCache('wow', 'output');
@@ -24,7 +51,7 @@ abstract class mod_wow_guild_tabard
 
         if (!$result = $cache->get($key)) {
             try {
-                $http = new JHttp(new JRegistry, new JHttpTransportCurl(new JRegistry));
+                $http = JHttpFactory::getHttp();
                 $http->setOption('userAgent', 'Joomla! ' . JVERSION . '; WoW Guild Tabard; php/' . phpversion());
 
                 $result = $http->get($url, null, $params->get('timeout', 10));

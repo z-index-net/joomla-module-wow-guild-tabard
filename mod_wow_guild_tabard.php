@@ -9,15 +9,11 @@
 
 defined('_JEXEC') or die;
 
-require_once dirname(__FILE__) . '/helper.php';
+JLoader::register('ModWowGuildTabardHelper', dirname(__FILE__) . '/helper.php');
 
-$params->set('guild', rawurlencode(strtolower($params->get('guild'))));
-$params->set('realm', rawurlencode(strtolower($params->get('realm'))));
-$params->set('region', strtolower($params->get('region')));
+$tabard = ModWowGuildTabardHelper::getData($params);
 
-$tabard = mod_wow_guild_tabard::_($params);
-
-if (!is_object($tabard)) {
+if (!$params->get('ajax') && !is_object($tabard)) {
     echo $tabard;
     return;
 }
