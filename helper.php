@@ -45,7 +45,7 @@ abstract class ModWowGuildTabardHelper
 
         $cache = JFactory::getCache('wow', 'output');
         $cache->setCaching(1);
-        $cache->setLifeTime($params->get('cache_time', 60));
+        $cache->setLifeTime($params->get('cache_time', 60) * 60);
 
         $key = md5($url);
 
